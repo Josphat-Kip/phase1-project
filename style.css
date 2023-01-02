@@ -1,340 +1,142 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400;600&display=swap');
+:root{
+    --background: #282c34;
+    --font: white;
 }
 
-html {
-  font-size: 65%;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-body {
-  background: blue;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+html{
+    font-size: 62.5%;
 }
 
-nav {
-  background: red;
-  box-shadow: 3px 5px 7px hsl(0, 0%, 50%);
-  padding: 2em 5em;
-  color: hsl(200, 15%, 8%);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+body{
+    background: var(--background);
+    font-family: Edu VIC WA NT Beginner;
 }
 
-nav.dark,
-body.dark .search,
-body.dark select {
-  background: hsl(180, 23%, 22%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: 1px 2px 3px hsl(200, 15%, 8%);
+nav{
+    padding: 2em 10em;
+    box-shadow: 0 0 5px 0 #4d5566;
 }
 
-.dark .search i,
-.dark .search input {
-  color: purple;
+h1{
+    font-size: 2em;
+    color: var(--font);
 }
-
-h1 {
-  font-size: 2rem;
-}
-
-body.dark .Dark {
-  color: hsl(0, 0%, 100%);
-}
-
-.container {
-  padding: 3em;
-}
-
-.search {
-  width: 35em;
-  height: 5em;
-  display: flex;
-  align-items: center;
-  padding: 1em;
-  background: white;
-  box-shadow: 3px 3px 5px hsl(0, 0%, 52%);
-}
-
-.Dark {
-  height: 2.5em;
-  width: 8em;
-  font-size: 1.4em;
-  font-weight: 600;
-  font-family: Nunito Sans;
-  border: none;
-  background: transparent;
-}
-
-.search input {
-  border: none;
-  outline: none;
-  height: 100%;
-  width: 100%;
-  padding: 1em;
-  font-size: 1.5em;
-  color: hsl(0, 0%, 52%);
-  font-family: Nunito Sans;
-  font-weight: 600;
-  background: transparent;
-}
-
-.searchicon {
-  height: 100%;
-  width: 3em;
-  /* padding: 1em; */
-  text-align: center;
-  /* border: 1px solid red; */
-  align-self: center;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  color: hsl(0, 0%, 52%);
-  font-size: 2em;
-}
-
-select {
-  width: 13em;
-  height: 3.2em;
-  font-size: 1.5em;
-  padding: 1em 0.5em;
-  background: white;
-  border: none;
-  box-shadow: 3px 3px 5px hsl(0, 0%, 52%);
-  font-family: Nunito Sans;
-  font-weight: 300;
-  border-radius: 0.2em;
-  color: hsl(200, 15%, 8%);
-  outline: none;
-}
-
-select option {
-  /* font-size: 1.1em; */
-  padding: 2em;
-  border: 1px solid red;
-}
-
-.searcharea {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.countries {
-  padding: 5em 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5em;
-}
-
-.DisplayCountry {
-  width: 27em;
-  height: 35em;
-  background-color: white;
-  color: hsl(200, 15%, 8%);
-}
-
-body.dark .DisplayCountry {
-  background: hsl(209, 23%, 22%);
-  color: hsl(0, 0%, 100%);
-}
-
-.DisplayCountry img {
-  width: 100%;
-  height: 50%;
-}
-
-.CountryDetails {
-  padding: 2em;
-}
-
-.CountryDetails h2 {
-  font-size: 1.6em;
-  margin-bottom: 1em;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.CountryDetails p {
-  width: 100%;
-  margin: 0.5em 0;
-  font-size: 1.4em;
-  color: hsl(0, 0%, 52%);
-  font-weight: 600;
-}
-
-/* .CountryDetails.dark > p {
-    color: red;
-} */
-
-.title {
-  color: hsl(200, 15%, 8%);
-  font-weight: 600;
-}
-
-body.dark .title {
-  color: hsl(0, 0%, 100%);
-}
-
-body.dark {
-  background: hsl(207, 26%, 17%);
-}
-
-.ShowMore {
-  padding: 5em;
-}
-
-body.dark .ShowMore button,
-body.dark .country {
-  background: hsl(209, 23%, 22%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: 3px 3px 5px hsl(200, 15%, 8%);
-}
-
-.ShowMore button {
-  width: 8em;
-  height: 3em;
-  margin-bottom: 3em;
-  font-family: Nunito Sans;
-  font-weight: 600;
-  background: hsl(0, 0%, 98%);
-  border: none;
-  box-shadow: 3px 3px 5px hsl(0, 0%, 52%);
-}
-
-button.country {
-  font-family: Nunito Sans;
-  font-weight: 600;
-  background: hsl(0, 0%, 98%);
-  border: none;
-  box-shadow: 3px 3px 5px hsl(0, 0%, 52%);
-  padding: 0.5em;
-  margin: 0.5em;
-  margin-bottom: unset;
-}
-
-.showContainer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.showContainer img {
-  width: 45%;
-  height: 40em;
-}
-
-.ExpandCountry {
-  width: 45%;
-  padding: 3em;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  color: hsl(200, 15%, 8%);
-}
-
-.showContainer h3 {
-  font-size: 2.5em;
-  margin-bottom: 1em;
-}
-
-.showContainer p {
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-.h4 {
-  line-height: 1;
-  margin-top: 2.5em;
-  width: 100%;
-}
-
-.details {
-  display: flex;
-  justify-content: space-between;
-}
-
-.details p {
-  color: hsl(0, 0%, 52%);
-}
-
-@media (max-width: 1024px) {
-  .ShowMore {
-    padding: 2em;
-  }
-
-  .showContainer {
-    display: block;
-  }
-
-  .showContainer img,
-  .ExpandCountry {
+.searcharea{
     width: 100%;
-  }
-
-  .ExpandCountry {
-    padding: 2em 0;
-  }
-
-  .details {
-    display: block;
-  }
-
-  .searcharea {
-    display: block;
-  }
-
-  .search {
-    width: 100%;
-  }
-
-  .countries {
-    justify-content: unset;
-  }
-
-  .DisplayCountry {
-    width: 45%;
-  }
-}
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 1.8em;
-  }
-
-  .Dark {
-    width: 7em;
-  }
-
-  nav {
-    padding: 2em;
-  }
-
-  .container {
-    padding: 2em;
-  }
-
-  select {
-    margin-top: 2em;
-  }
-
-  .countries {
-    /* padding: 2em; */
+    display: flex;
     justify-content: center;
-  }
-
-  .DisplayCountry {
-    width: 90%;
-  }
+    align-items: center;
 }
 
-@media (max-width: 400px) {
-  .showContainer img {
-    height: 25em;
-  }
+form{
+    width: 80%;
+}
+
+input{
+    border: none;
+    border-radius: 8em;
+    outline: none;
+    font-family: Edu VIC WA NT Beginner;
+    padding: 0 1em;
+    width: 100%;
+    height: 4em;
+    margin: 4em 0;
+    color: var(--background);
+    font-size: 1.4em;
+}
+
+input::placeholder {
+    color: var(--background);
+}
+h2.search{
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    padding: 0 2em 2em;
+}
+.container{
+    padding: 2em 10em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4em;
+    padding-bottom: 15em;
+}
+.recipe{
+    width: 35em;
+    background: var(--font);
+    padding-bottom: 2em;
+}
+.recipe img{
+    width: 100%;
+}
+.recipe-details{
+    padding: 2em;
+}
+.recipe-details h2{
+    font-size: 1.8em;
+}
+.recipe-details p{
+    font-size: 1.5em;
+    margin: 1em 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.recipe-details h3{
+    font-size: 1.3em;
+    margin-bottom: 2em;
+}
+.recipe-details a{
+    background: var(--background);
+    color: var(--font);
+    font-family: Edu VIC WA NT Beginner;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-size: 1.3em;
+    padding: 1em 2em;
+}
+footer{
+    color: white;
+    padding: 2em 10em;
+    font-size: 1.3em;
+    text-align: center;
+    box-shadow: 0 0 2px #4d5566;
+    bottom: 0;
+    position: fixed;
+    background: #282c34;
+    width: 100%;
+
+}
+
+@media (max-width:600px) {
+    nav, footer, .container{
+        padding: 2em 4em;
+    }
+    .container{
+        justify-content: center;
+        padding-bottom: 10em;
+    }
+}
+
+@media (max-width:480px) {
+    .recipe{
+        width: 90%;
+    }
+    nav, footer, .container{
+        padding: 2em;
+    }
+    .container{
+        padding-bottom: 10em;
+    }
 }

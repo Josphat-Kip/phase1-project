@@ -1,298 +1,69 @@
-function GetCountries() {
-  try {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Something wrong");
+document.querySelector("form").addEventListener("submit", GetRecipe)
+
+function GetRecipe(){
+    const SearchValue = document.querySelector("#search").value;
+   try{
+      fetch(`https://api.edamam.com/search?q=${SearchValue}&app_id=54746f42&app_key=ee2be6bd51262229750b0f60e65f89a0&to=20`, {
+        method: "POST",
+        header: {
+            "Access-Control-Allow-Origin": true
         }
       })
-      .then((data) => {
-        for (var i = 0; i < data.length; i++) {
-          const countriesContainer = document.querySelector(".countries");
-          const DisplayCountry = document.createElement("div");
-          DisplayCountry.setAttribute("data-name", data[i].name.common);
-          DisplayCountry.setAttribute("data-region", data[i].region);
-          DisplayCountry.setAttribute("class", "DisplayCountry");
-          const CountryFlag = document.createElement("img");
-          CountryFlag.setAttribute("src", data[i].flags.png);
-          CountryFlag.setAttribute("alt", data[i].name.official)
-          const CountryDetails = document.createElement("div");
-          CountryDetails.setAttribute("class", "CountryDetails");
-          const CountryName = document.createElement("h2");
-          CountryName.innerHTML = data[i].name.common;
-          const Paragraph1 = document.createElement("p");
-          const Title1 = document.createElement("span");
-          Title1.textContent = "Population : ";
-          Title1.setAttribute("class", "title");
-          const Population = document.createElement("span");
-          Population.textContent = data[i].population;
-          const Paragraph2 = document.createElement("p");
-          const Title2 = document.createElement("span");
-          Title2.textContent = "Region : ";
-          Title2.setAttribute("class", "title");
-          const Region = document.createElement("span");
-          Region.textContent = data[i].region;
-          const Paragraph3 = document.createElement("p");
-          const Title3 = document.createElement("span");
-          Title3.textContent = "Capital : ";
-          Title3.setAttribute("class", "title");
-          const Capital = document.createElement("span");
-          Capital.textContent = data[i].capital;
-
-          Paragraph1.append(Title1);
-          Paragraph1.append(Population);
-          Paragraph2.append(Title2);
-          Paragraph2.append(Region);
-          Paragraph3.append(Title3);
-          Paragraph3.append(Capital);
-          CountryDetails.append(CountryName);
-          CountryDetails.append(Paragraph1);
-          CountryDetails.append(Paragraph2);
-          CountryDetails.append(Paragraph3);
-          DisplayCountry.append(CountryFlag);
-          DisplayCountry.append(CountryDetails);
-          countriesContainer.append(DisplayCountry);
-        }
+      .then(r => r.json()
+      )
+      .then(data => {
+        console.log(data)
+        const Food = data.hits;
+        DesignOutput(Food, SearchValue)
       })
-      .catch((error) => {
-        document.querySelector(".countries").innerHTML =
-          "<h2>" + error.message + "</h2>";
-        console.log(error);
-      });
-  } catch {}
+      .catch(error => console.log(error.message))
+   } catch{}
+   document.querySelector("#search").value =""
 }
+function DesignOutput(Food, SearchValue) {
+  const Container = document.querySelector(".container");
+  Container.innerHTML = "";
+  for(let i=0; i<Food.length; i++) {
+    console.log(Food[i].recipe.label);
 
-GetCountries();
+    const Recipe = document.createElement("div");
+    Recipe.setAttribute("class", "recipe");
 
-document.addEventListener("click", event => {
-    const Title = event.target;
-    document.querySelectorAll("h2").forEach(h2 => {
-    if (Title == h2) {
-        const NameOfCountry = h2.innerHTML;
-        ShowMore(NameOfCountry);
-    }
+    const Thumbnail = document.createElement("img");
+    Thumbnail.src = Food[i].recipe.image;
 
-})
-})
+    const Details = document.createElement("div");
+    Details.setAttribute("class", "recipe-details");
 
-function ShowMore(NameOfCountry) {
-    try {
-    fetch(`https://restcountries.com/v3.1/name/${NameOfCountry}`)
-    .then(response => {
-        if(response.ok) {
-            return response.json()
-        } else {
-            throw new Error("Oops! Something went wrong!")
-        }
-    })
-    .then(data => {
-         console.log(data)
-         const Container = document.querySelector(".container");
-         const ShowCountries = document.querySelector(".countries")
-         const showMore = document.createElement("div")
-         showMore.setAttribute("class", "ShowMore");
-         const Back = document.createElement("button")
-         Back.innerHTML = "&LeftArrow; Back";
-         Back.setAttribute("onclick", "Back()")
-         const showContainer = document.createElement("div")
-         showContainer.setAttribute("class", "showContainer");
-         const Flag = document.createElement("img");
-         Flag.setAttribute("src", data[0].flags.png);
-         Flag.setAttribute("alt", data[0].name.official)
-         const ExpandCountry = document.createElement("div");
-         ExpandCountry.setAttribute("class", "ExpandCountry");
-         const Name = document.createElement("h3");
-         Name.setAttribute("class", "title");
-         Name.innerHTML = data[0].name.common;
-         const Details = document.createElement("div");
-         Details.setAttribute("class", "details")
-         const Details1 = document.createElement("div")
-         const Details2 = document.createElement("div");
+    const Name = document.createElement("h2");
+    Name.innerHTML = Food[i].recipe.label;
+    
+    const recipes = document.createElement("p")
+    recipes.innerHTML = Food[i].recipe.ingredientLines.join("<br/")
 
+    const Source = document.createElement("h3")
+    Source.innerHTML = `Source : ${Food[i].recipe.source}`
 
-           const NativeName = document.createElement("p")
-         const Native = document.createElement("span")
-         Native.setAttribute("class", "title");
-         Native.textContent = "Native name : "
-         NativeName.append(Native)
-           NativeName.append(data[0].name.official)
+    const Visit = document.createElement("a")
+    Visit.href = Food[i].recipe.url;
+    Visit.innerHTML = "Visit Source"
 
-         const Populations = document.createElement("p")
-         const pops = document.createElement("span")
-         pops.setAttribute("class", "title");
-         pops.textContent = "Population : "
-         Populations.append(pops)
-         Populations.append(data[0].population);
-       
-       
-          const RegionName = document.createElement("p")
-         const Regionn = document.createElement("span")
-         Regionn.setAttribute("class", "title");
-         Regionn.textContent = "Region : "
-         RegionName.append(Regionn)
-         RegionName.append(data[0].region)
+    Details.append(Name)
+    Details.append(recipes)
+    Details.append(Source)
+    Details.append(Visit)
 
+    Recipe.append(Thumbnail)
+    Recipe.append(Details)
 
-        
-         const SubRegion = document.createElement("p")
-         const Subreg = document.createElement("span")
-         Subreg.setAttribute("class", "title");
-         Subreg.textContent = "Sub Region : "
-        SubRegion.append(Subreg)
-         SubRegion.append(data[0].subregion)
+    Container.append(Recipe)
+  } 
 
-
-         const CapitalName = document.createElement("p")
-         const Capitall = document.createElement("span")
-         Capitall.setAttribute("class", "title");
-         Capitall.textContent = "Capital : "
-         CapitalName.append(Capitall)
-         CapitalName.append(data[0].capital)
-
-         const TopLevelDomain = document.createElement("p")
-         const TLD = document.createElement("span")
-         TLD.setAttribute("class", "title");
-         TLD.textContent = "Top level domain : "
-         TopLevelDomain.append(TLD)
-         TopLevelDomain.append(data[0].tld)
-
-         const Currencies = document.createElement("p")
-         const Currency = document.createElement("span")
-         Currency.setAttribute("class", "title");
-         Currency.textContent = "Currencies : "
-         Currencies.append(Currency)
-         const currency = Object.keys(data[0].currencies);
-         Currencies.append(currency)
-        //  for (const property in currency) {
-        //     Currencies.append(JSON.stringify(currency))
-        //  }
-
-         const Languages = document.createElement("p")
-         const language = document.createElement("span")
-         language.setAttribute("class", "title");
-         language.textContent = "Languages : "
-         Languages.append(language)
-         const languages = data[0].languages
-         for (const property in languages) {
-         Languages.append(languages[property] + ", ")
-         }
-
-         const Borders = document.createElement("p")
-         const Border = document.createElement("span")
-         Borders.setAttribute("class", "h4");
-         Border.setAttribute("class", "title")
-         Border.textContent = "Border Countries : "
-         Borders.append(Border)
-         const borderCountry =  data[0].borders;
-       
-         for (var i=0; i<borderCountry.length; i++) {
-            const EachBorder = document.createElement("button");
-            EachBorder.setAttribute("class", "country");
-            EachBorder.innerHTML = borderCountry[i];
-            Borders.append(EachBorder)
-         }
-  
-
-
-         Details1.append(NativeName)
-         Details1.append(Populations)
-         Details1.append(RegionName)
-         Details1.append(SubRegion)
-         Details1.append(CapitalName)
-
-         Details2.append(TopLevelDomain)
-         Details2.append(Currencies)
-         Details2.append(Languages)
-
-         Details.append(Details1);
-         Details.append(Details2)
-
-
-         ExpandCountry.append(Name)
-         ExpandCountry.append(Details)
-         ExpandCountry.append(Borders)
-
-         showContainer.append(Flag);
-         showContainer.append(ExpandCountry)
-         
-         showMore.append(Back);
-         showMore.append(showContainer)
-        //  Container.replaceWith(showMore)
-        Container.style.display = "none";
-        // Container.replaceChild()
-        document.querySelector("body").append(showMore)
-    })
-    console.log(NameOfCountry)
-
-
-
-
-
-
-    .catch(error => document.querySelector(".countries").innerHTML =
-    "<h2>" + error.message + "</h2>")
-    }catch {}
-}
-
-SelectDropdown = document.querySelector("select");
-
-SelectDropdown.addEventListener("change", () => {
-  const RegionValue =
-    SelectDropdown.options[SelectDropdown.selectedIndex].value;
-  console.log(RegionValue);
-
-  document.querySelectorAll(".DisplayCountry").forEach((div) => {
-    const Region = div.dataset.region;
-    div.style.display = "none";
-    if (Region === RegionValue) {
-      div.style.display = "block";
-    }
-  });
-});
-
-function Back() {
-   const Extended = document.querySelectorAll(".ShowMore").forEach(div => {
-  //   div.style.display = "none"
-   })
-  //  Extended.style.display = "none";
-
-   const NormalContainer = (document.querySelector(".container"));
-   NormalContainer.style.display = "block"
-   
-}
-
-document.querySelector("input").addEventListener("keyup", Search);
-
-function Search() {
-  const SearchedCountry = document.querySelector("input").value.toUpperCase();
-  document.querySelectorAll(".DisplayCountry").forEach((div) => {
-    const Name = div.dataset.name.toUpperCase();
-    div.style.display = "none";
-
-    if (Name.match(SearchedCountry)) {
-      div.style.display = "block";
-    }
-  });
-}
-
-function DarkMode() {
-  const Moon = document.querySelector("i");
-  const Body = document.querySelector("body");
-  const Nav = document.querySelector("nav");
-  const Search = document.querySelector(".search");
-  const Select = document.querySelector("select");
-  const Button = document.querySelector(".Dark");
-  const Display = document.querySelectorAll(".DisplayCountry");
-  const Title = document.querySelectorAll(".title");
-  if (Moon.classList.contains("fa-regular")) {
-    Moon.classList.replace("fa-regular", "fa-solid");
-    Body.classList.add("dark");
-    Nav.classList.add("dark");
-  } else {
-    Moon.classList.replace("fa-solid", "fa-regular");
-    Body.classList.remove("dark");
-    Nav.classList.remove("dark");
+  if(Food.length<1) {
+    document.querySelector("h2. search").innerHTML = `No search results for "${SearchValue}"`
   }
+  else{
+document.querySelector("h2.search").innerHTML = `Showing ${Food.length} search results for "${SearchValue}"`
+  }
+  
 }
