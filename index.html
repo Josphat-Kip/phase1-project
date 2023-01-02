@@ -4,23 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe Finder</title>
-    <link rel="stylesheet" href="style.css"
-    <script src="app.js" defer></script>
+    <title>COUNTRIES PROJECT</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <h2>Recipe Finder</h2>
-      <img src="icon.png" alt="finder" />
-    </header>
-    <section class="container">
-      <div class="search">
-        <input type="text" placeholder="Search fav" autofocus />
-        <button class="btn"> Find</button>
+    <main>
+      <nav>
+        <h1>Where in the world?</h1>
+        <button class="Dark" onclick="DarkMode()">
+          <i class="fa-regular fa-moon"></i> Dark Mode
+        </button>
+      </nav>
+      <div class="container">
+        <div class="searcharea">
+          <form class="search" onsubmit="return false">
+            <i class="fa-solid searchicon fa-magnifying-glass"></i>
+            <input
+              type="text"
+              name="search"
+              id="search"
+              required="required"
+              autocomplete="off"
+              placeholder="Search for a country"
+            />
+          </form>
+          <select name="region" id="region" aria-label="Region">
+            <option value="" disabled selected hidden>Filter by Region</option>
+            <option data-region="Africa" value="Africa">Africa</option>
+            <option data-region="America" value="Americas">America</option>
+            <option data-region="Asia" value="Asia">Asia</option>
+            <option data-region="Europe" value="Europe">Europe</option>
+            <option data-region="Oceania" value="Oceania">Oceania</option>
+          </select>
+        </div>
+        <div class="countries"></div>
       </div>
-      <div id="recipe-container">
-     
-      </div>
-    </section>
+    </main>
+    <script src="script.js"></script>
   </body>
 </html>
